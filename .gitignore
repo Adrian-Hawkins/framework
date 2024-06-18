@@ -131,3 +131,6 @@ dist
 
 .idea
 *.tfvars
+
+.terraform
+*.tfstate*
