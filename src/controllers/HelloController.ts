@@ -17,7 +17,7 @@ export class HelloController implements controller {
 
   @Get('/')
   hello(req: Request, res: Response) {
-    this.dependencyA.doSomething();
+    // this.dependencyA.doSomething();
     res.status(200).send({
       message: 'Hello, World!'
     });
