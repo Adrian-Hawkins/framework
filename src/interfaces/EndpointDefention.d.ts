@@ -1,4 +1,4 @@
 export interface EndpointDefenition {
-    method: string;
+    method: string; 
     handler: Function;
 }

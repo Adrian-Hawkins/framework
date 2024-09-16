@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import { Controller, Get, Post, Injected } from "../decorators";
+import { Controller, Get, Post } from "../decorators";
 import { controller, EndpointDefenition } from '../interfaces';
-import {DependencyA} from "../services/Dependancy";
 
 @Controller('/hello')
 export class HelloController implements controller {
@@ -12,12 +11,8 @@ export class HelloController implements controller {
   static endpoint = '';
   static endpoints = {}
 
-  @Injected(DependencyA)
-  private dependencyA!: DependencyA;
-
   @Get('/')
   hello(req: Request, res: Response) {
-    // this.dependencyA.doSomething();
     res.status(200).send({
       message: 'Hello, World!'
     });
