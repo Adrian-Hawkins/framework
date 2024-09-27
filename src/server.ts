@@ -2,6 +2,7 @@ import { Application, Router, RequestHandler, IRouter, NextFunction  } from 'exp
 import { controller } from './interfaces';
 import { HttpMethods } from './types';
 import { Logger } from "./logging/logger";
+import {logger} from "./logging/loggerv2";
 
 function isHttpMethod(method: string): method is HttpMethods {
   return (
@@ -21,7 +22,7 @@ function errorWrapper(handler: RequestHandler): RequestHandler {
       await handler(req, res, next);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      Logger.error(errorMessage);
+      logger.error(errorMessage);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
@@ -33,9 +34,10 @@ export function registerControllers(app: Application, controllers: controller[])
       const method: string = value.method;
       if (isHttpMethod(method)) {
         const wrappedHandler = errorWrapper(value.handler as RequestHandler);
+        logger.info(`Registering ${method.toUpperCase()} ${controller.endpoint}${key}`);
         (router as IRouter)[method](key, wrappedHandler);
       } else {
-        console.warn(`Invalid HTTP method: ${method}`);
+        logger.warn(`Invalid HTTP method: ${method}`);
       }
     }
     app.use(controller.endpoint, router);

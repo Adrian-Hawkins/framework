@@ -11,12 +11,24 @@ export class HelloController implements controller {
   static endpoint = '';
   static endpoints = {}
 
+  soemthing:string = "sds";
+
   @Get('/')
   hello(req: Request, res: Response) {
+    console.log(this.soemthing)
     res.status(200).send({
       message: 'Hello, World!'
     });
   }
+
+  @Get('/test')
+  bye(req: Request, res: Response) {
+    console.log(this.soemthing)
+    res.status(200).send({
+      message: 'bye, World!'
+    });
+  }
+
 
   @Get('/user/:id')
   test(req: Request, res: Response) {
