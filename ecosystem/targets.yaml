@@ -1,24 +1,9 @@
 - targets:
   - host.docker.internal:14001
   labels:
-    job: client_node
+    job: node
  
 - targets:
   - host.docker.internal:13500
   labels:
-    job: client_service
- 
-- targets:
-  - host.docker.internal:14002
-  labels:
-    job: collections_node
- 
-- targets:
-  - host.docker.internal:13700
-  labels:
-    job: collections_service
- 
-- targets:
-  - host.docker.internal:9091
-  labels:
-    job: pushgateway
+    job: service

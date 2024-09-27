@@ -19,13 +19,13 @@ function defineEndpoint(route: string, method: HttpMethods) {
         const controllerClass = target.constructor;
         let instance: any;
         controllerClass.endpoints[route] = {
-        method,
-        handler: function (req: Request, res: Response, next: NextFunction) {
-            if (!instance) {
-                instance = new controllerClass();
+            method,
+            handler: function (req: Request, res: Response, next: NextFunction) {
+                if (!instance) {
+                    instance = new controllerClass();
+                }
+                return descriptor.value.call(instance, req, res, next);
             }
-            return descriptor.value.call(instance, req, res, next);
-        }
         };
     };
 }
